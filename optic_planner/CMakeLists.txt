@@ -71,7 +71,7 @@ set(libParsePDDL_SRCS
 
 add_library(ParsePDDL SHARED ${libParsePDDL_SRCS})
 
-set(libInst_SRCS
+set(libInstOptic_SRCS
       ${val_SOURCE_DIR}/SimpleEval.cpp
       ${val_SOURCE_DIR}/FastEnvironment.cpp
       ${val_SOURCE_DIR}/instantiation.cpp
@@ -83,9 +83,9 @@ set(libInst_SRCS
       ${val_SOURCE_DIR}/TypeStripWC.cpp
 )
 
-add_library(Inst SHARED ${libInst_SRCS})
+add_library(InstOptic SHARED ${libInstOptic_SRCS})
 
-target_link_libraries(Inst ParsePDDL)
+target_link_libraries(InstOptic ParsePDDL)
 
 
 install(TARGETS ParsePDDL
@@ -118,7 +118,7 @@ set(optic_build_srcs
     )
 
 add_library(opticCommon SHARED ${optic_build_srcs})
-target_link_libraries(opticCommon ParsePDDL Inst ${CBC_LIBRARIES})
+target_link_libraries(opticCommon ParsePDDL InstOptic ${CBC_LIBRARIES})
 
 ADD_EXECUTABLE(optic_planner ${optic_SOURCE_DIR}/opticMain.cpp)
 target_link_libraries(optic_planner
@@ -126,13 +126,13 @@ target_link_libraries(optic_planner
   ${CGL_LIBRARIES}
 )
 
-install(TARGETS optic_planner opticCommon ParsePDDL Inst
+install(TARGETS optic_planner opticCommon ParsePDDL InstOptic
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_export_include_directories(include)
-ament_export_libraries(opticCommon ParsePDDL Inst)
+ament_export_libraries(opticCommon ParsePDDL InstOptic)
 ament_export_dependencies(${dependencies})
 ament_package()
