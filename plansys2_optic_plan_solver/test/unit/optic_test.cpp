@@ -59,6 +59,9 @@ TEST(optic_plan_solver, load_optic_plugin)
   }
 }
 
+// Domain checks are temporarily removed due to a segmentation fault for unkonwn reasons.
+// See issue: https://github.com/sscpac/optic_planner/issues/9
+
 // TEST(optic_plan_solver, check_1_ok_domain)
 // {
 //   std::string pkgpath = ament_index_cpp::get_package_share_directory("plansys2_optic_plan_solver");
