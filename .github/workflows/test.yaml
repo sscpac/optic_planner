@@ -22,10 +22,6 @@ jobs:
           - docker_image: osrf/ros:humble-desktop-full
             ros_distribution: humble
 
-          # Jazzy Jalisco (May 2024 - May 2029)
-          - docker_image: osrf/ros:jazzy-desktop-full
-            ros_distribution: jazzy
-
     container:
       image: ${{ matrix.docker_image }}
 
@@ -35,7 +31,7 @@ jobs:
         with:
           required-ros-distributions: ${{ matrix.ros_distribution }}
       - run: |
-          rosinstall_generator <package-name> --rosdistro <target-distro> \
+          rosinstall_generator plansys2_optic_plan_solver --rosdistro humble \
           --deps-only --deps --upstream-development > /tmp/deps.repos
       - name: Build and test
         id: built-and-test
