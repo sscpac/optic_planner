@@ -35,8 +35,8 @@ jobs:
         with:
           required-ros-distributions: ${{ matrix.ros_distribution }}
       - run: |
-        rosinstall_generator <package-name> --rosdistro <target-distro> \
-        --deps-only --deps --upstream-development > /tmp/deps.repos
+          rosinstall_generator <package-name> --rosdistro <target-distro> \
+          --deps-only --deps --upstream-development > /tmp/deps.repos
       - name: Build and test
         id: built-and-test
         uses: ros-tooling/action-ros-ci@v0.3
