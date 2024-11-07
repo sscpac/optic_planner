@@ -39,6 +39,5 @@ jobs:
         id: built-and-test
         uses: ros-tooling/action-ros-ci@v0.3
         with:
-          package-name: plansys2_optic_plan_solver
           target-ros2-distro: ${{ matrix.ros_distribution }}
           vcs-repo-file-url: ""
