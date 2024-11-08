@@ -1,0 +1,33 @@
+name: test
+
+on: # NOLINT
+  pull_request:
+  push:
+  schedule:
+    - cron: '0 10 * * MON'
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        ros_distribution:
+          - humble
+        include:
+          # Humble Hawksbill (May 2022 - May 2027)
+          - docker_image: osrf/ros:humble-desktop-full
+            ros_distribution: humble
+    container:
+      image: ${{ matrix.docker_image }}
+    steps:
+      - name: Setup ROS 2
+        uses: ros-tooling/setup-ros@v0.7
+        with:
+          required-ros-distributions: ${{ matrix.ros_distribution }}
+      - name: Build and test
+        id: built-and-test
+        uses: ros-tooling/action-ros-ci@v0.3
+        with:
+          package_name: plansys2_optic_plan_solver
+          target-ros2-distro: ${{ matrix.ros_distribution }}
+
