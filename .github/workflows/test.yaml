@@ -15,8 +15,6 @@ jobs:
       matrix:
         ros_distribution:
           - humble
-          - jazzy
-
         include:
           # Humble Hawksbill (May 2022 - May 2027)
           - docker_image: osrf/ros:humble-desktop-full
