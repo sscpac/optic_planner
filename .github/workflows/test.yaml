@@ -10,7 +10,6 @@ on: # NOLINT
 jobs:
   build-and-test:
     runs-on: ubuntu-22.04
-
     strategy:
       matrix:
         ros_distribution:
@@ -19,10 +18,11 @@ jobs:
           # Humble Hawksbill (May 2022 - May 2027)
           - docker_image: osrf/ros:humble-desktop-full
             ros_distribution: humble
-
+          # Jazzy Jalisco (May 2024 - May 2029)
+          - docker_image: osrf/ros:jazzy-desktop-full
+            ros_distribution: jazzy
     container:
       image: ${{ matrix.docker_image }}
-
     steps:
       - name: Setup ROS 2
         uses: ros-tooling/setup-ros@v0.7
